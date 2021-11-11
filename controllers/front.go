@@ -8,9 +8,12 @@ import (
 
 func RegisterControllers() {
 	uc := newUserController()
+	pc := newProductsController()
 
 	http.Handle("/users", *uc)
 	http.Handle("/users/", *uc)
+	http.Handle("/products", *pc)
+	http.Handle("/products/", *pc)
 }
 
 func encodeResponseAsJSON(data interface{}, w io.Writer) {

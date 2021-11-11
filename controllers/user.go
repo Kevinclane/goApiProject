@@ -105,6 +105,15 @@ func (uc *userController) delete(id int, w http.ResponseWriter) {
 	w.WriteHeader(http.StatusOK)
 }
 
+// func (uc *userController) login(username string, password string, w http.ResponseWriter) {
+// 	err := models.Login(username, password)
+// 	if err != nil {
+// 		w.WriteHeader(http.StatusInternalServerError)
+// 		w.Write([]byte(err.Error()))
+// 		return
+// 	}
+// }
+
 func (uc *userController) parseRequest(r *http.Request) (models.User, error) {
 	dec := json.NewDecoder(r.Body)
 	var u models.User

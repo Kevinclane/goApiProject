@@ -9,11 +9,13 @@ type User struct {
 	ID        int
 	FirstName string
 	LastName  string
+	Username  string
+	Password  string
 }
 
 var (
-	users  []*User
-	nextID = 1
+	users      []*User
+	nextUserID = 1
 )
 
 func GetUsers() []*User {
@@ -24,8 +26,15 @@ func AddUser(u User) (User, error) {
 	if u.ID != 0 {
 		return User{}, errors.New("New User must not include an ID or it must be set to 0")
 	}
-	u.ID = nextID
-	nextID++
+	if u.Username == "" {
+		return User{}, errors.New("Must provide a username")
+	}
+	if u.Password == "" {
+		return User{}, errors.New("Must provide a password")
+	}
+	u.ID = nextUserID
+
+	nextUserID++
 	users = append(users, &u)
 	return u, nil
 }
