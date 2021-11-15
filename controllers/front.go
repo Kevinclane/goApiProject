@@ -9,11 +9,13 @@ import (
 func RegisterControllers() {
 	uc := newUserController()
 	pc := newProductsController()
+	cc := newCartsController()
 
 	http.Handle("/users", *uc)
 	http.Handle("/users/", *uc)
 	http.Handle("/products", *pc)
 	http.Handle("/products/", *pc)
+	http.Handle("/cart/", *cc)
 }
 
 func encodeResponseAsJSON(data interface{}, w io.Writer) {

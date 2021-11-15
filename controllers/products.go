@@ -10,7 +10,7 @@ import (
 var api = "https://fakestoreapi.com/products"
 
 type productsController struct {
-	userIDPattern *regexp.Regexp
+	productIDPattern *regexp.Regexp
 }
 
 func (pc productsController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -21,7 +21,7 @@ func (pc productsController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusNotImplemented)
 		}
 	} else {
-		matches := pc.userIDPattern.FindStringSubmatch(r.URL.Path)
+		matches := pc.productIDPattern.FindStringSubmatch(r.URL.Path)
 		if len(matches) == 0 {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -74,6 +74,6 @@ func (pc *productsController) getProductById(id int, w http.ResponseWriter) {
 
 func newProductsController() *productsController {
 	return &productsController{
-		userIDPattern: regexp.MustCompile(`^/products/(\d+)/?`),
+		productIDPattern: regexp.MustCompile(`^/products/(\d+)/?`),
 	}
 }
